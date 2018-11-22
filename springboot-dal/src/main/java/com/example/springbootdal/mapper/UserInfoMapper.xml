@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.springbootdal.dao.UserInfoMapper">
+
+	<!--实体映射-->
+	<resultMap id="BaseResultMap" type="com.example.springbootdal.model.UserInfo">
+		<!--主键ID-->
+		<id property="id" column="id" />
+		<!--姓名-->
+		<result property="name" column="name" />
+		<!--性别-->
+		<result property="sex" column="sex" />
+		<!--年龄-->
+		<result property="age" column="age" />
+		<!--身份证号-->
+		<result property="cardNo" column="card_no" />
+		<!--手机号-->
+		<result property="mobile" column="mobile" />
+	</resultMap>
+
+
+	<!-- 通用查询结果列-->
+	<sql id="Base_Column_List">
+	id,	name,	sex,	age,	card_no,	mobile
+	</sql>
+
+	<!-- 查询（根据主键ID查询） -->
+	<select id="selectByPrimaryKey" resultType="com.example.springbootdal.model.UserInfo" parameterType="java.lang.Long">
+		 SELECT
+		 <include refid="Base_Column_List" />
+		 FROM t_user_info
+		 WHERE id = #{id}
+	</select>
+
+	<!-- 添加 （匹配有值的字段）-->
+	<insert id="insertSelective" parameterType="com.example.springbootdal.model.UserInfo">
+		 INSERT INTO t_user_info
+		 <trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="id != null">
+				 id,
+			</if>
+			<if test="name != null">
+				 name,
+			</if>
+			<if test="sex != null">
+				 sex,
+			</if>
+			<if test="age != null">
+				 age,
+			</if>
+			<if test="cardNo != null">
+				 card_no,
+			</if>
+			<if test="mobile != null">
+				 mobile,
+			</if>
+
+		 </trim>
+		 <trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="id!=null">
+				 #{id},
+			</if>
+			<if test="name!=null">
+				 #{name},
+			</if>
+			<if test="sex!=null">
+				 #{sex},
+			</if>
+			<if test="age!=null">
+				 #{age},
+			</if>
+			<if test="cardNo!=null">
+				 #{cardNo},
+			</if>
+			<if test="mobile!=null">
+				 #{mobile},
+			</if>
+		 </trim>
+	</insert>
+
+	<!-- 修 改-->
+	<update id="updateByPrimaryKeySelective" parameterType="com.example.springbootdal.model.UserInfo">
+		 UPDATE t_user_info
+ 		 <set> 
+			<if test="name != null">
+				 name = #{name},
+			</if>
+			<if test="sex != null">
+				 sex = #{sex},
+			</if>
+			<if test="age != null">
+				 age = #{age},
+			</if>
+			<if test="cardNo != null">
+				 card_no = #{cardNo},
+			</if>
+			<if test="mobile != null">
+				 mobile = #{mobile},
+			</if>
+
+ 		 </set>
+		 WHERE id = #{id}
+	</update>
+
+</mapper>

@@ -32,7 +32,7 @@ public class MailController {
         //发送的标题
         mail.setSubject("嗨天天喽");
         //发送的内容
-        mail.setContent("hello world");
+        mail.setContent("hello worlduuuuuu");
         mailService.send(mail);
         return "10000";
     }
